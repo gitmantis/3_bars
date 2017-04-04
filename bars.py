@@ -33,8 +33,8 @@ def get_smallest_bar(data):
 def get_closest_bar(data, longitude, latitude):
     distance = 0    
     closest_bar = {}
-    EARTH_RADIUS = 6372795    
-    distance_min = 2*math.pi*EARTH_RADIUS
+    earthradius = 6372795    
+    distance_min = 2*math.pi*earthradius
    
     for bar in data:
         bar_longitude = bar["geoData"]["coordinates"][0]
@@ -60,7 +60,7 @@ def get_closest_bar(data, longitude, latitude):
         x = sl1 * sl2 + cl1 * cl2 * cdelta;
  
         ad = math.atan2(y, x);
-        distance = ad * EARTH_RADIUS;
+        distance = ad * earthradius;
         
         if distance < distance_min:
             distance_min = distance
