@@ -13,20 +13,20 @@ def load_data(filepath):
 
 def get_biggest_bar(data):
     biggest_bar = {}
-    SeatsCount  = 0
+    seatscount  = 0
     for bar in data:
-        if bar["SeatsCount"] > SeatsCount:
+        if bar["SeatsCount"] > seatscount:
             biggest_bar = bar
-            SeatsCount  = bar["SeatsCount"]
+            seatscount  = bar["SeatsCount"]
     return biggest_bar
 
 def get_smallest_bar(data):
     smallest_bar = {}
-    SeatsCount  = get_biggest_bar(bars_data)["SeatsCount"]
+    seatscount  = get_biggest_bar(bars_data)["SeatsCount"]
     for bar in data:
-        if bar["SeatsCount"] < SeatsCount:
+        if bar["SeatsCount"] < seatscount:
             smallest_bar = bar
-            SeatsCount  = bar["SeatsCount"]
+            seatscount  = bar["SeatsCount"]
     return smallest_bar
 
 
@@ -75,9 +75,11 @@ if __name__ == '__main__':
     mylong = float(input("Enter your longitude:"))
 
     bars_data = load_data(fpath)
-
+    print("\nBiggest bar: \n") 
     pprint (get_biggest_bar(bars_data))
+    print("\nSmallest bar: \n") 
     pprint (get_smallest_bar(bars_data))
+    print("\nClosest bar: \n") 
     pprint (get_closest_bar(bars_data,mylong,mylat))
 
     
