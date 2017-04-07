@@ -1,34 +1,22 @@
 import json
 import math
+import os.path
+from operator import itemgetter, attrgetter
 from pprint import pprint
 
 
 def load_data(filepath):
-    try:
-    	with open(filepath, 'r', encoding='utf-8', errors='ignore') as json_file:
-            return json.load(json_file)
-    except OSError as ex:
-    	print ("Can't process file", filepath, "Error is ", ex)
+    if not os.path.exists(filepath):
+        return None
+    with open(filepath, 'r', encoding='utf-8', errors='ignore') as json_file:
+        return json.load(json_file)
 
 
 def get_biggest_bar(data):
-    biggest_bar = {}
-    seatscount  = 0
-    for bar in data:
-        if bar["SeatsCount"] > seatscount:
-            biggest_bar = bar
-            seatscount  = bar["SeatsCount"]
-    return biggest_bar
+    return max([bar for bar in data], key=lambda d: d['SeatsCount'])    
 
 def get_smallest_bar(data):
-    smallest_bar = {}
-    seatscount  = get_biggest_bar(bars_data)["SeatsCount"]
-    for bar in data:
-        if bar["SeatsCount"] < seatscount:
-            smallest_bar = bar
-            seatscount  = bar["SeatsCount"]
-    return smallest_bar
-
+    return min([bar for bar in data], key=lambda d: d['SeatsCount'])
 
 def get_closest_bar(data, longitude, latitude):
     distance = 0    
@@ -81,5 +69,4 @@ if __name__ == '__main__':
     pprint (get_smallest_bar(bars_data))
     print("\nClosest bar: \n") 
     pprint (get_closest_bar(bars_data,mylong,mylat))
-
     
